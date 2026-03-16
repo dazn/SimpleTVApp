@@ -25,6 +25,13 @@ class PhotoViewModel(
         if (photos.isEmpty()) "" else buildStreamUrl(photos[idx])
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "")
 
+    val preloadUrls: StateFlow<List<String>> = combine(_photos, _currentIndex) { photos, idx ->
+        buildList {
+            if (idx > 0) add(buildStreamUrl(photos[idx - 1]))
+            if (idx < photos.lastIndex) add(buildStreamUrl(photos[idx + 1]))
+        }
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
     val hasPrev: StateFlow<Boolean> = _currentIndex
         .map { it > 0 }
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)

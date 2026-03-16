@@ -14,6 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import coil3.ImageLoader
+import coil3.memory.MemoryCache
 import coil3.network.okhttp.OkHttpNetworkFetcherFactory
 import okhttp3.OkHttpClient
 import org.dazn.simpletvapp.data.repository.MediaRepository
@@ -53,6 +54,11 @@ fun App() {
 
     val imageLoader = remember {
         ImageLoader.Builder(context)
+            .memoryCache {
+                MemoryCache.Builder()
+                    .maxSizePercent(context, 0.4)
+                    .build()
+            }
             .components {
                 add(OkHttpNetworkFetcherFactory(
                     callFactory = {
