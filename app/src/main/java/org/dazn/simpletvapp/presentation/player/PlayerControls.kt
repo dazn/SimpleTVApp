@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,6 +17,9 @@ import androidx.compose.ui.unit.dp
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
+import compose.icons.TablerIcons
+import compose.icons.tablericons.PlayerPause
+import compose.icons.tablericons.PlayerPlay
 import kotlin.math.abs
 
 @OptIn(ExperimentalTvMaterial3Api::class)
@@ -37,10 +42,11 @@ fun PlayerControls(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = if (isPlaying) "⏸" else "▶",
-                style = MaterialTheme.typography.bodyLarge,
-                color = Color.White,
+            Icon(
+                imageVector = if (isPlaying) TablerIcons.PlayerPause else TablerIcons.PlayerPlay,
+                contentDescription = if (isPlaying) "Pause" else "Play",
+                tint = Color.White,
+                modifier = Modifier.size(24.dp)
             )
             Text(
                 text = " $filename",

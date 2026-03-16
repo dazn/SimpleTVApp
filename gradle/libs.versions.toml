@@ -14,6 +14,7 @@ media3 = "1.6.0-beta01"
 kotlinxSerializationJson = "1.8.0"
 coroutinesTest = "1.8.1"
 junit4 = "4.13.2"
+composeIconsTabler = "1.1.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -25,6 +26,7 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-tv-foundation = { group = "androidx.tv", name = "tv-foundation", version.ref = "tvFoundation" }
 androidx-tv-material = { group = "androidx.tv", name = "tv-material", version.ref = "tvMaterial" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
@@ -37,6 +39,7 @@ androidx-media3-ui-compose = { group = "androidx.media3", name = "media3-ui-comp
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
+compose-icons-tabler = { group = "br.com.devsrsouza.compose.icons", name = "tabler-icons", version.ref = "composeIconsTabler" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

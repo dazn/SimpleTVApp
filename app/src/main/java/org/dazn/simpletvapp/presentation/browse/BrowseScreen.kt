@@ -1,6 +1,7 @@
 package org.dazn.simpletvapp.presentation.browse
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.material3.Icon
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -34,6 +36,11 @@ import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Surface
 import androidx.tv.material3.Text
+import compose.icons.TablerIcons
+import compose.icons.tablericons.File
+import compose.icons.tablericons.FileMusic
+import compose.icons.tablericons.Folder
+import compose.icons.tablericons.Movie
 import org.dazn.simpletvapp.data.model.MediaItem
 
 @OptIn(ExperimentalTvMaterial3Api::class)
@@ -165,16 +172,25 @@ private fun MediaRow(
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = itemIcon(item), style = MaterialTheme.typography.bodyLarge, color = Color(0xFFCCCCCC))
+            ItemIcon(item)
             Spacer(modifier = Modifier.width(12.dp))
             Text(text = item.name, style = MaterialTheme.typography.bodyLarge, color = Color(0xFFCCCCCC))
         }
     }
 }
 
-private fun itemIcon(item: MediaItem): String = when {
-    item.type == "directory" -> "📁"
-    item.streamFormat in listOf("mp4", "mkv", "hls", "dash") -> "🎬"
-    item.streamFormat in listOf("mp3", "mka", "mks") -> "🎵"
-    else -> "📄"
+@Composable
+private fun ItemIcon(item: MediaItem) {
+    val vector = when {
+        item.type == "directory" -> TablerIcons.Folder
+        item.streamFormat in listOf("mp4", "mkv", "hls", "dash") -> TablerIcons.Movie
+        item.streamFormat in listOf("mp3", "mka", "mks") -> TablerIcons.FileMusic
+        else -> TablerIcons.File
+    }
+    Icon(
+        imageVector = vector,
+        contentDescription = null,
+        tint = Color(0xFFCCCCCC),
+        modifier = Modifier.size(24.dp)
+    )
 }
