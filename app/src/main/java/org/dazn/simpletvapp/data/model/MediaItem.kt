@@ -1,5 +1,6 @@
 package org.dazn.simpletvapp.data.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -29,9 +30,10 @@ data class MediaItem(
     val path: String,
     val type: String,
     val size: Long? = null,
-    val contentType: String? = null,
+    @SerialName("content_type") val contentType: String? = null,
     val streamFormat: String? = null,
     val ffprobe_response: FfprobeResponse? = null,
 ) {
     val name: String get() = path.substringAfterLast("/").ifEmpty { path }
+    val isPhoto: Boolean get() = contentType?.startsWith("image/") == true
 }

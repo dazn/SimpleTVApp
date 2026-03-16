@@ -41,12 +41,14 @@ import compose.icons.tablericons.File
 import compose.icons.tablericons.FileMusic
 import compose.icons.tablericons.Folder
 import compose.icons.tablericons.Movie
+import compose.icons.tablericons.Photo
 import org.dazn.simpletvapp.data.model.MediaItem
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun BrowseScreen(
     onNavigateToPlayer: (path: String, format: String, displayAspectRatio: String?, videoCodec: String?, audioCodec: String?) -> Unit,
+    onNavigateToPhoto: (String) -> Unit,
     onExitApp: () -> Unit,
     viewModel: BrowseViewModel = viewModel()
 ) {
@@ -109,6 +111,8 @@ fun BrowseScreen(
                                     onClick = {
                                         if (item.type == "directory") {
                                             viewModel.loadPath(item.path)
+                                        } else if (item.isPhoto) {
+                                            onNavigateToPhoto(item.path)
                                         } else {
                                             val videoStream = item.ffprobe_response?.streams?.firstOrNull { it.codec_type == "video" }
                                             val audioStream = item.ffprobe_response?.streams?.firstOrNull { it.codec_type == "audio" }
@@ -183,6 +187,7 @@ private fun MediaRow(
 private fun ItemIcon(item: MediaItem) {
     val vector = when {
         item.type == "directory" -> TablerIcons.Folder
+        item.isPhoto -> TablerIcons.Photo
         item.streamFormat in listOf("mp4", "mkv", "hls", "dash") -> TablerIcons.Movie
         item.streamFormat in listOf("mp3", "mka", "mks") -> TablerIcons.FileMusic
         else -> TablerIcons.File

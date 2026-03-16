@@ -86,6 +86,7 @@ class MediaApiClientTest {
         assertEquals(1, items.size)
         assertEquals("Bag Raiders - Shooting Stars [O-MQC_G9jTU].mp3", items[0].path)
         assertEquals("Bag Raiders - Shooting Stars [O-MQC_G9jTU].mp3", items[0].name)
+        assertEquals("audio/mpeg", items[0].contentType)
     }
 
     @Test
@@ -104,5 +105,6 @@ class MediaApiClientTest {
         assertEquals("clip.mp4", items[1].name)
         assertEquals("file", items[1].type)
         assertEquals("mp4", items[1].streamFormat)
+        assertEquals("video/mp4", items[1].contentType)
     }
 }
